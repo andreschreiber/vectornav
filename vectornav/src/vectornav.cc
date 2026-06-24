@@ -66,6 +66,9 @@ Vectornav::Vectornav(const rclcpp::NodeOptions & options) : Node("vectornav", op
   // {1 2 4 5 10 20 25 40 50 100 200}
   declare_parameter<int>("AsyncDataOutputFrequency", 20);
 
+  // Heading Mode
+  declare_parameter<int>("headingMode", vn::protocol::uart::HeadingMode::HEADINGMODE_ABSOLUTE);
+
   // Sync control
   // 5.2.9
 
@@ -145,7 +148,7 @@ Vectornav::Vectornav(const rclcpp::NodeOptions & options) : Node("vectornav", op
   /// GPS Compass Baseline (8.2.3)
 
   // Message Header
-  declare_parameter<std::string>("frame_id", "vectornav");
+  declare_parameter<std::string>("frame_id", "vectornav_link");
 
   // Composite Data Publisher
   pub_common_ =
@@ -307,10 +310,10 @@ void Vectornav::execute_cal(const std::shared_ptr<MagCalGH> goal_handle)
   // Cannot test for this mode as it sets, then changes immediately
   vs_->writeMagnetometerCalibrationControl(magControl);
 
-  // Set VPE basic control to absolute
+  // Set VPE basic control to desired heading mode
   vn::sensors::VpeBasicControlRegister vpeControl = {
     vn::protocol::uart::VpeEnable::VPEENABLE_ENABLE,
-    vn::protocol::uart::HeadingMode::HEADINGMODE_ABSOLUTE,
+    (vn::protocol::uart::HeadingMode)get_parameter("headingMode").as_int(),
     vn::protocol::uart::VpeMode::VPEMODE_MODE1,  // By default these seem to be mode 1 not off
     vn::protocol::uart::VpeMode::VPEMODE_MODE1   // By default these seem to be mode 1 not off
   };

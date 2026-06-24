@@ -15,6 +15,8 @@ vectornav:
     # Async output Frequency (Hz)
     # Not sure why this has to be 1Hz to make it work. Very strange.
     AsyncDataOutputFrequency: 1
+    # Heading mode
+    headingMode: 0                   # 0=absolute, 1=relative, 2=indoor
     # Sync control
     syncInMode: 3                    # SYNCINMODE_COUNT
     syncInEdge: 0                    # SYNCINEDGE_RISING
@@ -93,7 +95,7 @@ vectornav:
       attitudeField: 0x0000          # ATTITUDEGROUP_NONE
       insField: 0x0000               # INSGROUP_NONE
       gps2Field: 0x0000              # GPSGROUP_NONE
-    frame_id: "vectornav"
+    frame_id: "vectornav_link"
 
 vn_sensor_msgs:
   ros__parameters:

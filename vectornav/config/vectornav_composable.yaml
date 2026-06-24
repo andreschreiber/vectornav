@@ -6,6 +6,8 @@ reconnect_ms: 500
 AsyncDataOutputType: 0           # VNOFF
 # Async output Frequency (Hz)
 AsyncDataOutputFrequency: 20
+# Heading mode
+headingMode: 0                   # 0=absolute, 1=relative, 2=indoor
 # Sync control
 syncInMode: 3                    # SYNCINMODE_COUNT
 syncInEdge: 0                    # SYNCINEDGE_RISING
@@ -55,4 +57,4 @@ BO3:
   attitudeField: 0x0000          # ATTITUDEGROUP_NONE
   insField: 0x0000               # INSGROUP_NONE
   gps2Field: 0x0000              # GPSGROUP_NONE
-frame_id: "vectornav"
+frame_id: "vectornav_link"
