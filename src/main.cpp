@@ -428,6 +428,7 @@ void fill_imu_message(
       msgIMU.linear_acceleration.z = al[2];
     }
     // Covariances pulled from parameters
+    msgIMU.orientation_covariance = user_data->orientation_covariance; // override. comment out to disable.
     msgIMU.angular_velocity_covariance = user_data->angular_vel_covariance;
     msgIMU.linear_acceleration_covariance = user_data->linear_accel_covariance;
   }
